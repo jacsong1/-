@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 提示词模板生成器</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>✨ AI 提示词模板生成器</h1>
+            <p class="subtitle">快速生成专业级 AI 绘图/写作提示词</p>
+        </header>
+
+        <main class="main-content">
+            <!-- 左侧：输入区域 -->
+            <section class="panel input-panel">
+                <h2>📝 参数配置</h2>
+                
+                <div class="form-group">
+                    <label for="templateType">模板类型</label>
+                    <select id="templateType">
+                        <option value="image">🎨 AI 绘图提示词</option>
+                        <option value="writing">✍️ AI 写作提示词</option>
+                        <option value="chat">💬 AI 对话提示词</option>
+                        <option value="code">💻 AI 编程提示词</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="subject">主体描述 <span class="required">*</span></label>
+                    <input type="text" id="subject" placeholder="例如：一只可爱的橘猫" value="一只可爱的橘猫">
+                </div>
+
+                <!-- 绘图专属选项 -->
+                <div id="imageOptions" class="options-group">
+                    <div class="form-group">
+                        <label for="artStyle">艺术风格</label>
+                        <select id="artStyle">
+                            <option value="照片写实风格">照片写实风格</option>
+                            <option value="日式动漫风格">日式动漫风格</option>
+                            <option value="赛博朋克风格">赛博朋克风格</option>
+                            <option value="油画风格">油画风格</option>
+                            <option value="水彩画风格">水彩画风格</option>
+                            <option value="水墨画风格">水墨画风格</option>
+                            <option value="3D 渲染风格">3D 渲染风格</option>
+                            <option value="像素风格">像素风格</option>
+                            <option value="扁平设计风格">扁平设计风格</option>
+                            <option value="印象派风格">印象派风格</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quality">画质要求</label>
+                        <select id="quality">
+                            <option value="杰作, 最佳画质, 超精细">杰作 + 最佳画质 + 超精细</option>
+                            <option value="最佳画质, 高精细">最佳画质 + 高精细</option>
+                            <option value="8K 分辨率, 锐利对焦">8K 分辨率 + 锐利对焦</option>
+                            <option value="高质量">高质量</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lighting">光影效果</label>
+                        <select id="lighting">
+                            <option value="柔和光线">柔和光线</option>
+                            <option value="戏剧性光线">戏剧性光线</option>
+                            <option value="黄金时刻光线">黄金时刻光线</option>
+                            <option value="霓虹灯光">霓虹灯光</option>
+                            <option value="影棚灯光">影棚灯光</option>
+                            <option value="逆光效果">逆光效果</option>
+                            <option value="体积光">体积光</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="viewAngle">视角/构图</label>
+                        <select id="viewAngle">
+                            <option value="特写镜头">特写镜头</option>
+                            <option value="广角镜头">广角镜头</option>
+                            <option value="鸟瞰视角">鸟瞰视角</option>
+                            <option value="仰视角度">仰视角度</option>
+                            <option value="人像构图">人像构图</option>
+                            <option value="全身构图">全身构图</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="colorTone">色调氛围</label>
+                        <select id="colorTone">
+                            <option value="鲜艳色调">鲜艳色调</option>
+                            <option value="柔和粉彩色调">柔和粉彩色调</option>
+                            <option value="暗黑忧郁色调">暗黑忧郁色调</option>
+                            <option value="暖色调">暖色调</option>
+                            <option value="冷色调">冷色调</option>
+                            <option value="单色调">单色调</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 写作专属选项 -->
+                <div id="writingOptions" class="options-group hidden">
+                    <div class="form-group">
+                        <label for="writingType">写作类型</label>
+                        <select id="writingType">
+                            <option value="story">短篇故事</option>
+                            <option value="article">文章/散文</option>
+                            <option value="poem">诗歌</option>
+                            <option value="dialogue">对话剧本</option>
+                            <option value="advertisement">广告文案</option>
+                            <option value="email">邮件</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="writingTone">语气风格</label>
+                        <select id="writingTone">
+                            <option value="幽默风趣">幽默风趣</option>
+                            <option value="正式专业">正式专业</option>
+                            <option value="温馨治愈">温馨治愈</option>
+                            <option value="悬疑紧张">悬疑紧张</option>
+                            <option value="诗意浪漫">诗意浪漫</option>
+                            <option value="简洁明了">简洁明了</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 对话专属选项 -->
+                <div id="chatOptions" class="options-group hidden">
+                    <div class="form-group">
+                        <label for="chatRole">AI 角色设定</label>
+                        <select id="chatRole">
+                            <option value="专家顾问">专家顾问</option>
+                            <option value="学习导师">学习导师</option>
+                            <option value="创意伙伴">创意伙伴</option>
+                            <option value="生活助手">生活助手</option>
+                            <option value="心理咨询师">心理咨询师</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- 编程专属选项 -->
+                <div id="codeOptions" class="options-group hidden">
+                    <div class="form-group">
+                        <label for="codeLanguage">编程语言</label>
+                        <select id="codeLanguage">
+                            <option value="Python">Python</option>
+                            <option value="JavaScript">JavaScript</option>
+                            <option value="TypeScript">TypeScript</option>
+                            <option value="Java">Java</option>
+                            <option value="C++">C++</option>
+                            <option value="Go">Go</option>
+                            <option value="Rust">Rust</option>
+                            <option value="SQL">SQL</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="codeTask">任务类型</label>
+                        <select id="codeTask">
+                            <option value="代码生成">代码生成</option>
+                            <option value="代码解释">代码解释</option>
+                            <option value="Bug 修复">Bug 修复</option>
+                            <option value="代码重构">代码重构</option>
+                            <option value="性能优化">性能优化</option>
+                            <option value="单元测试">单元测试</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="extraKeywords">额外关键词（逗号分隔）</label>
+                    <input type="text" id="extraKeywords" placeholder="例如：森林背景, 阳光透过树叶, 梦幻氛围">
+                </div>
+
+                <button id="generateBtn" class="btn-generate">
+                    🚀 生成提示词
+                </button>
+
+                <button id="randomBtn" class="btn-random">
+                    🎲 随机组合
+                </button>
+            </section>
+
+            <!-- 右侧：结果展示区域 -->
+            <section class="panel output-panel">
+                <h2>🎯 生成结果</h2>
+                
+                <div class="result-group">
+                    <div class="result-header">
+                        <h3>✨ 正向提示词</h3>
+                        <button class="copy-btn" data-target="positivePrompt">📋 复制</button>
+                    </div>
+                    <textarea id="positivePrompt" readonly placeholder="点击「生成提示词」按钮，这里将显示生成的正向提示词..."></textarea>
+                </div>
+
+                <!-- 以下两个区域仅在绘图模板下显示 -->
+                <div id="negativeGroup" class="result-group">
+                    <div class="result-header">
+                        <h3>🚫 负面提示词</h3>
+                        <div class="header-actions">
+                            <select id="negativePreset" class="mini-select">
+                                <option value="standard">标准负面词</option>
+                                <option value="heavy">强力负面词</option>
+                                <option value="portrait">人像专用</option>
+                                <option value="nsfw">NSFW 防护</option>
+                            </select>
+                            <button class="copy-btn" data-target="negativePrompt">📋 复制</button>
+                        </div>
+                    </div>
+                    <textarea id="negativePrompt" readonly placeholder="负面提示词将在此显示..."></textarea>
+                </div>
+
+                <div id="paramGroup" class="result-group">
+                    <div class="result-header">
+                        <h3>⚙️ 参数建议</h3>
+                    </div>
+                    <div id="paramSuggestions" class="param-list">
+                        <p class="placeholder">参数建议将在此显示...</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>💡 提示：善用负面词可以大幅提升生成质量，参数建议仅供参考，请根据实际情况调整</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
